@@ -1,10 +1,11 @@
 target("libBX")
     set_kind("static")
+    add_cxxflags("/Zc:__cplusplus")
 
     local BX_DIR = "$(projectdir)/Vendor/bx/"
 
-    add_includedirs(BX_DIR .. "include")
-    add_includedirs(BX_DIR .. "include/bx/inline")
+    add_includedirs(BX_DIR .. "include", {public = true})
+    add_includedirs(BX_DIR .. "include/bx/inline", {public = true})
 
     if is_plat("windows") then 
         add_defines("__STDC_LIMIT_MACROS"
@@ -23,8 +24,8 @@ target("libBX")
                 , "_CRT_SECURE_NO_DEPRECATE"
                 , "BX_CONFIG_DEBUG")
 
-        add_includedirs(BX_DIR .. "include/compat/msvc")
-        add_includedirs(BX_DIR .. "3rdparty")
+        add_includedirs(BX_DIR .. "include/compat/msvc", {public = true})
+        add_includedirs(BX_DIR .. "3rdparty", {public = true})
 
         add_files(BX_DIR .. "src/**.cpp|amalgamated.cpp") --|crtnone.cpp
 
