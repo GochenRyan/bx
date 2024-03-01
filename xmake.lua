@@ -35,3 +35,5 @@ target("libBX")
 
         add_files(BX_DIR .. "src/**.cpp|amalgamated.cpp")
     end
+
+    set_group("Vendor")
